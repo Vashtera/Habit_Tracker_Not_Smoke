@@ -15,7 +15,7 @@ async def command_start_handler(message: Message) -> None:
         await message.answer("Привет новый пользователь, для продолжения работы нужно зарегистрироваться",
                              reply_markup=kb.keyboard_for_unexcisting_user)
     else:
-        await message.answer(f"Привет {message.from_user.full_name}\n я трекер твоего отказа от курения",
+        await message.answer(f"Привет {message.from_user.full_name}\nЯ трекер твоего отказа от курения",
                          reply_markup=kb.keyboard_for_excisting_user)
 
     
