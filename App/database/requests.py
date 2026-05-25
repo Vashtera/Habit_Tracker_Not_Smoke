@@ -13,3 +13,14 @@ async def get_user_by_tg_id(tg_id: int):
         user = await cursor.fetchone()
         # 4. Возвращаем полученную строку (или None)
         return user
+    
+async def add_user(tg_id: int, name: str, price: float, start_date: str):
+    # 1. Открываешь соединение через async with aiosqlite.connect(DB_PATH) as db:
+        async with aiosqlite.connect(DB_PATH) as db:    
+        # 2. Выполняешь команду db.execute со строкой INSERT INTO... 
+        # И передаешь в нее кортеж со всеми четырьмя переменными: (tg_id, name, price, start_date)
+            db.execute("""
+                INSERT INTO users (tg_id, name, price, start_date, saved_money) VALUES (?, ?, ?, ?, 0)
+            """, (tg_id, name, price, start_date))
+        # 3. Делаешь await db.commit(), чтобы сохранить нового курильщика
+        await db.commit()
