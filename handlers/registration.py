@@ -3,7 +3,6 @@ from aiogram.types import Message, CallbackQuery
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import StatesGroup, State
 
-import App.keyboards as kb
 from App.database.requests import add_user
 
 router = Router()
@@ -27,7 +26,7 @@ async def register_price(message: Message, state: FSMContext):
 @router.message(Register.start_date)
 async def register_date(message: Message, state: FSMContext):
     data = await state.get_data()
-    user_price = data.get("price")
+    user_price = float(data.get("price"))
     user_date = message.text
     user_id = message.from_user.id
     user_name = message.from_user.first_name

@@ -14,7 +14,7 @@ async def get_user_by_tg_id(tg_id: int):
         # 4. Возвращаем полученную строку (или None)
         return user
     
-async def add_user(tg_id: int, name: str, price: int, start_date: str):
+async def add_user(tg_id: int, name: str, price: float, start_date: str):
     # 1. Открываешь соединение через async with aiosqlite.connect(DB_PATH) as db:
         async with aiosqlite.connect(DB_PATH) as db:    
         # 2. Выполняешь команду db.execute со строкой INSERT INTO... 
