@@ -19,9 +19,16 @@ def calculate_profile_data(start_date_str: str, price: float):
 @router.callback_query(F.data == 'profile')
 async def show_profile(callback: CallbackQuery):
     await callback.answer()
+    user = await get_user_by_tg_id(callback.from_user.id)
+    user_price = user[3]
+    user_date = user[4]
+    days, money = calculate_profile_data(user_date, user_price)
     await callback.message.answer(
         f"<b>{callback.message.from_user.full_name}</b>\n\n"
-        f"Username - {callback.message.from_user.username or "Empty"}\n",
+        f"Username - {callback.message.from_user.username or "Empty"}\n"
+        f"Starting date - {user_date}\n"
+        f"Days without smoke - {days}\n"
+        f"Money saved - {money}",
         #нужно внести начало даты, потом количество дней без курения и сэкономленные деньги
         parse_mode=ParseMode.HTML
     )
