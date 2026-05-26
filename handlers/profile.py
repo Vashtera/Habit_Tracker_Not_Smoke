@@ -24,11 +24,11 @@ async def show_profile(callback: CallbackQuery):
     user_date = user[4]
     days, money = calculate_profile_data(user_date, user_price)
     await callback.message.answer(
-        f"<b>{callback.from_user.full_name}</b>\n\n"
-        f"Username - {callback.from_user.username or "Empty"}\n"
-        f"Starting date - {user_date}\n"
-        f"Days without smoke - {days}\n"
-        f"Money saved - {money}",
+        f"Привет! <b>{callback.from_user.full_name}</b>\n\n"
+        f"Ваше имя - {callback.from_user.username or "Empty"}\n"
+        f"Дата начала - {user_date}\n"
+        f"дней без курения - {days}\n"
+        f"Сэкономлено денег - {money}",
         parse_mode=ParseMode.HTML,
         reply_markup=ReplyKeyboardRemove()
     )
