@@ -8,6 +8,14 @@ from App.database.requests import get_user_by_tg_id
 
 router = Router()
 
+def calculate_profile_data(start_date_str: str, price: float):
+    start_date_obj = datetime.strptime(start_date_str, "%d.%m.%Y").date()
+    today = datetime.now().date()
+    days_without_smoke = (today - start_date_obj).days
+
+    total_save = days_without_smoke * price
+    return days_without_smoke, total_save
+
 @router.callback_query(F.data == 'profile')
 async def show_profile(callback: CallbackQuery):
     await callback.answer()
@@ -17,7 +25,4 @@ async def show_profile(callback: CallbackQuery):
         #нужно внести начало даты, потом количество дней без курения и сэкономленные деньги
         parse_mode=ParseMode.HTML
     )
-
-async def show_days(message: Message):
-    user = await get_user_by_tg_id(message.from_user.id)
 
