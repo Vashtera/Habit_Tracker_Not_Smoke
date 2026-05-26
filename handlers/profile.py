@@ -29,7 +29,6 @@ async def show_profile(callback: CallbackQuery):
         f"Starting date - {user_date}\n"
         f"Days without smoke - {days}\n"
         f"Money saved - {money}",
-        #нужно внести начало даты, потом количество дней без курения и сэкономленные деньги
         parse_mode=ParseMode.HTML
     )
 
