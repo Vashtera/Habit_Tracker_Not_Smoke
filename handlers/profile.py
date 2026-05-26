@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from aiogram import F, Router
-from aiogram.types import CallbackQuery, Message
+from aiogram.types import CallbackQuery, ReplyKeyboardRemove
 from aiogram.enums import ParseMode
 
 from App.database.requests import get_user_by_tg_id
@@ -24,11 +24,13 @@ async def show_profile(callback: CallbackQuery):
     user_date = user[4]
     days, money = calculate_profile_data(user_date, user_price)
     await callback.message.answer(
-        f"<b>{callback.message.from_user.full_name}</b>\n\n"
-        f"Username - {callback.message.from_user.username or "Empty"}\n"
+        f"<b>{callback.from_user.full_name}</b>\n\n"
+        f"Username - {callback.from_user.username or "Empty"}\n"
         f"Starting date - {user_date}\n"
         f"Days without smoke - {days}\n"
         f"Money saved - {money}",
-        parse_mode=ParseMode.HTML
+        parse_mode=ParseMode.HTML,
+        reply_markup=ReplyKeyboardRemove()
     )
+    
 
