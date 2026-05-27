@@ -10,6 +10,8 @@ router = Router()
 class Register(StatesGroup):
     price = State()
     start_date = State()
+    cigarettes_in_pack = State()
+    cigarettes_per_day = State() 
 
 @router.callback_query(F.data == "registration")
 async def add_new_user(callback: CallbackQuery, state: FSMContext):
