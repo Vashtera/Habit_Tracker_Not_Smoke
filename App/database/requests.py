@@ -43,5 +43,11 @@ async def add_user(
 async def change_price_in_db(tg_id: int, new_price: float, new_date, new_balance: float):
      async with aiosqlite.connect(DB_PATH) as db:
             await db.execute(""" 
-                UPDATE users 
-            """)
+                UPDATE users SET (
+                                price = ?,
+                                price_change_date = ?,
+                                saved_money = ?,
+                                WHERE tg_id = ?
+                            )    
+            """, (new_price, new_date, new_balance, tg_id))
+            await db.commit()
