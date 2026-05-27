@@ -13,7 +13,8 @@ async def create_tables():
                 start_date TEXT,
                 saved_money REAL,
                 cigarettes_in_pack INTEGER,            
-                cigarettes_per_day INTEGER
+                cigarettes_per_day INTEGER,
+                price_change_date TEXT
             )
         """)
         await db.commit()
