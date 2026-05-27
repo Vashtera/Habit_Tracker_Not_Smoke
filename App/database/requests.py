@@ -54,7 +54,7 @@ async def change_price_in_db(tg_id: int, new_price: float, new_date, new_balance
 async def reset_user_progress(tg_id: int, new_date):
     async with aiosqlite.connect(DB_PATH) as db:
             await db.execute("""
-                UPDATE user SET
+                UPDATE users SET
                             saved_money = 0,
                             start_date = ?,
                             price_change_date = ?
