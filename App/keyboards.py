@@ -15,6 +15,6 @@ keyboard_for_unexcisting_user = InlineKeyboardMarkup(inline_keyboard=[
     resize_keyboard=True)
 
 keyboard_to_back_home = ReplyKeyboardMarkup(keyboard=[
-    [KeyboardButton(text="Старт")]
+    [KeyboardButton(text="/start")]
 ], resize_keyboard=True)
 
