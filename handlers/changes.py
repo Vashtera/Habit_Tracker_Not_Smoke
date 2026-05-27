@@ -29,3 +29,5 @@ async def change_with_new_price(message: Message, state: FSMContext):
     user_saved_money = user[5]
     old_date_obj = datetime.strptime(user_old_date, "%d.%m.%Y").date()
     today_obj = datetime.now().date()
+    days = today_obj - old_date_obj
+    new_balance = user_saved_money + (days * user_cig_per_day * (user_old_price / user_cig_in_pack))
