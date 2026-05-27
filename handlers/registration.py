@@ -22,17 +22,32 @@ async def add_new_user(callback: CallbackQuery, state: FSMContext):
 @router.message(Register.price)
 async def register_price(message: Message, state: FSMContext):
     await state.update_data(price=message.text)
+    await state.set_state(Register.cigarettes_in_pack)
+    await message.answer("Введите количество сигарет в Вашей пачке")
+
+@router.message(Register.cigarettes_in_pack)
+async def register_pack_size(message: Message, state: FSMContext):
+    await state.update_data(cigarettes_in_pack=message.text)
+    await state.set_state(Register.cigarettes_per_day)
+    await message.answer("Сколько сигарет в день Вы выкуривали?")
+
+@router.message(Register.cigarettes_per_day)
+async def register_amount_per_day(message: Message, state: FSMContext):
+    await state.update_data(cigarettes_per_day=message.text)
     await state.set_state(Register.start_date)
-    await message.answer("Введите дату, когда ты бросил курить в формате ДД.ММ.ГГГГ")
+    await message.answer("Введите дату, когда Вы бросили курить в формате ДД.ММ.ГГГГ")
 
 @router.message(Register.start_date)
 async def register_date(message: Message, state: FSMContext):
     data = await state.get_data()
     user_price = float(data.get("price"))
+    user_pack = int(data.get("cigarettes_in_pack"))
+    user_day = int(data.get("cigarettes_per_day"))
     user_date = message.text
     user_id = message.from_user.id
     user_name = message.from_user.first_name
-    await add_user(user_id, user_name, user_price, user_date)
+
+    await add_user(user_id, user_name, user_price, user_date, user_pack, user_day)
     await state.clear()
     await message.answer("Регистрация прошла успешно!")
                                   
