@@ -39,3 +39,9 @@ async def add_user(
             """, (tg_id, name, price, start_date, cigarettes_in_pack, cigarettes_per_day))
         # 3. Делаем await db.commit(), чтобы сохранить нового курильщика
             await db.commit()
+
+async def change_price_in_db(tg_id: int, new_price: float, new_date, new_balance: float):
+     async with aiosqlite.connect(DB_PATH) as db:
+            await db.execute(""" 
+                UPDATE users 
+            """)
