@@ -41,7 +41,7 @@ async def add_user(
             await db.commit()
 
 async def change_price_in_db(tg_id: int, new_price: float, new_date, new_balance: float):
-     async with aiosqlite.connect(DB_PATH) as db:
+    async with aiosqlite.connect(DB_PATH) as db:
             await db.execute(""" 
                 UPDATE users SET 
                                 price = ?,
@@ -49,4 +49,15 @@ async def change_price_in_db(tg_id: int, new_price: float, new_date, new_balance
                                 saved_money = ?
                                 WHERE tg_id = ?   
             """, (new_price, new_date, new_balance, tg_id))
+            await db.commit()
+
+async def reset_user_progress(tg_id: int, new_date):
+    async with aiosqlite.connect(DB_PATH) as db:
+            await db.execute("""
+                UPDATE user SET
+                            saved_money = 0,
+                            start_date = ?,
+                            price_change_date = ?
+                            WHERE tg_id = ?
+            """, (new_date, new_date, tg_id))
             await db.commit()
