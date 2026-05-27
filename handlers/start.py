@@ -7,7 +7,7 @@ from App.database.requests import get_user_by_tg_id
 
 router = Router()
 
-# This command shows the keyboard only for existing users(NEED TO CHANGE)
+# This command shows the keyboard only for existing users
 @router.message(Command("start"))
 async def command_start_handler(message: Message) -> None:
     user = await get_user_by_tg_id(message.from_user.id)
@@ -15,8 +15,10 @@ async def command_start_handler(message: Message) -> None:
         await message.answer("Привет новый пользователь, для продолжения работы нужно зарегистрироваться",
                              reply_markup=kb.keyboard_for_unexcisting_user)
     else:
+        await message.answer("Загружаю информацию", reply_markup=kb.keyboard_to_back_home)
         await message.answer(f"Привет {message.from_user.full_name}\nЯ трекер твоего отказа от курения",
                          reply_markup=kb.keyboard_for_excisting_user)
+    
 
     
 

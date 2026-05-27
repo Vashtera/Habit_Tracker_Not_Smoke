@@ -1,4 +1,4 @@
-from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardMarkup, KeyboardButton
 
 
 keyboard_for_excisting_user = InlineKeyboardMarkup(inline_keyboard=[
@@ -13,4 +13,8 @@ keyboard_for_unexcisting_user = InlineKeyboardMarkup(inline_keyboard=[
     [InlineKeyboardButton(text="Зарегистроваться", callback_data="registration")]
 ],
     resize_keyboard=True)
+
+keyboard_to_back_home = ReplyKeyboardMarkup(keyboard=[
+    [KeyboardButton(text="Старт")]
+])
 
