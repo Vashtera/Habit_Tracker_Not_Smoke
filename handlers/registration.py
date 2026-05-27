@@ -4,6 +4,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import StatesGroup, State
 
 from App.database.requests import add_user
+from App.keyboards import keyboard_for_excisting_user
 
 router = Router()
 
@@ -49,7 +50,8 @@ async def register_date(message: Message, state: FSMContext):
 
     await add_user(user_id, user_name, user_price, user_date, user_pack, user_day)
     await state.clear()
-    await message.answer("Регистрация прошла успешно!")
+    await message.answer("Регистрация прошла успешно!",
+                         reply_markup=keyboard_for_excisting_user)
                                   
 
 
