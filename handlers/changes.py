@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from aiogram import F, Router
 from aiogram.types import Message, CallbackQuery
 from aiogram.fsm.context import FSMContext
@@ -25,3 +27,5 @@ async def change_with_new_price(message: Message, state: FSMContext):
     user_cig_in_pack = user[6]
     user_cig_per_day = user[7]
     user_saved_money = user[5]
+    old_date_obj = datetime.strptime(user_old_date, "%d.%m.%Y").date()
+    today_obj = datetime.now().date()
